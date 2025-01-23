@@ -1,7 +1,8 @@
-import { TicketFiltersList, TicketsListHome } from '@/components/home'
-import { PaginationDemo, Search } from '@/components/ui'
+import { TicketsListHome, TicketFiltersList } from '@/components/home'
+import { PaginationDemo } from '@/components/ui'
+import { Search } from 'lucide-react'
 
-export default function Home() {
+export default function MyTickets() {
   return (
     <main className='flex flex-col gap-16 p-20'>
       <Search />
