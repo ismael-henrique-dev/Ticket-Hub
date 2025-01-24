@@ -31,9 +31,7 @@ export function FormRegister() {
       >
         Esqueci a senha
       </a>
-      <Button type='submit' variant='submit'>
-        Cadastrar
-      </Button>
+      <Button type='submit'>Cadastrar</Button>
     </form>
   )
 }

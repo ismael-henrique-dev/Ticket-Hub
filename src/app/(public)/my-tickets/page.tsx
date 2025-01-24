@@ -1,6 +1,5 @@
-import { TicketsListHome, TicketFiltersList } from '@/components/home'
-import { PaginationDemo } from '@/components/ui'
-import { Search } from 'lucide-react'
+import { TicketsListMyTickets } from '@/components/my-tickets'
+import { PaginationDemo, Search } from '@/components/ui'
 
 export default function MyTickets() {
   return (
@@ -8,10 +7,9 @@ export default function MyTickets() {
       <Search />
       <div className='flex flex-1 justify-between gap-16'>
         <div className='flex flex-1 flex-col gap-8'>
-          <TicketsListHome />
+          <TicketsListMyTickets />
           <PaginationDemo />
         </div>
-        <TicketFiltersList />
       </div>
     </main>
   )

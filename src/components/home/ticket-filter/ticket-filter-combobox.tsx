@@ -10,7 +10,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command'
+} from '@/components/shadcn-ui/command'
 import {
   Popover,
   PopoverContent,
@@ -55,7 +55,6 @@ export function TicketFilterCombobox() {
           {value
             ? frameworks.find((framework) => framework.value === value)?.label
             : 'Select framework...'}
-          
         </button>
       </PopoverTrigger>
       <PopoverContent className='w-80 p-0'>
