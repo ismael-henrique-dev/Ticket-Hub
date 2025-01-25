@@ -5,7 +5,7 @@ import { TicketCard } from '../ui'
 
 export function TicketsListMyTickets() {
   return (
-    <section className='grid grid-cols-2 gap-8'>
+    <section id='tickets-list-my-tickets' className='flex flex-1 flex-col gap-8'>
       {Array.from({ length: 4 }).map((_, index) => (
         <TicketCard.Root variant='secondary' key={index}>
           <TicketCard.Content>

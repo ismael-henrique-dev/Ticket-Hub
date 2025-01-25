@@ -1,4 +1,7 @@
-import { TicketCardAction, TicketCardActions } from './ticket-card-actions'
+import {
+  TicketCardActions,
+  TicketCardReservationModal,
+} from './ticket-card-actions'
 import { TicketCardContent } from './ticket-card-content'
 import { TicketCardIcon } from './ticket-card-icon'
 import { TicketCardInfo } from './ticket-card-info'
@@ -10,7 +13,7 @@ export const TicketCard = {
   Content: TicketCardContent,
   Icon: TicketCardIcon,
   PriceSummary: TicketCardPriceSummary,
-  Action: TicketCardAction,
+  Modal: TicketCardReservationModal,
   Actions: TicketCardActions,
   Info: TicketCardInfo,
 }

@@ -23,7 +23,11 @@ export function TicketCardActions() {
   )
 }
 
-export function TicketCardAction() {
+
+// Aplicar composition patern
+
+
+export function TicketCardReservationModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -40,10 +44,10 @@ export function TicketCardAction() {
           </DialogClose>
         </DialogHeader>
         <div className='flex flex-col items-center gap-8 p-8 border border-zinc-300 rounded-xl'>
-          <h2>Resumo</h2>
-          <strong>R$ 440,00</strong>
+          <h2 className='font-semibold'>Resumo</h2>
+          <strong className='text-orange-500 text-2xl font-semibold'>R$ 440,00</strong>
           <div className='flex-1 flex flex-col gap-4 w-full'>
-            <h2 className='text-center'>3 Pessoa(s)</h2>
+            <h2 className='text-center font-semibold'>3 Pessoa(s)</h2>
             <div className='flex items-center justify-between w-full px-4'>
               <span className='text-sm text-zinc-500'>Arthur Morgan (eu)</span>
               <span className='text-sm text-zinc-500'>R$ 440,00</span>
@@ -57,24 +61,13 @@ export function TicketCardAction() {
               <span className='text-sm text-zinc-500'>R$ 440,00</span>
             </div>
           </div>
-          <div className='flex-1 flex flex-col items-center w-full'>
+          <div className='flex-1 flex flex-col w-full gap-4'>
             <Button variant='simple'>Adicionar acompanhantes</Button>
-            <Button>Adicionar acompanhantes</Button>
+            <Button variant='simple-orange'>Reservar passagens</Button>
           </div>
         </div>
-        {/* <DialogFooter className="sm:justify-start">
-          <DialogClose asChild>
-            <Button type="button" variant="square-red">
-              Close
-            </Button>
-          </DialogClose>
-        </DialogFooter> */}
+       
       </DialogContent>
     </Dialog>
-
-    // <Button variant='default'>
-    //   Reservar
-    //   <Ticket size={20} />
-    // </Button>
   )
 }
