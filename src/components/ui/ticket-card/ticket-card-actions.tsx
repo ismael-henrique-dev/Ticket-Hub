@@ -1,8 +1,11 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import { usePersonForm } from '@/hooks/use-person-form'
+import { useTicketParam } from '@/hooks/use-ticket-param'
+import { TicketForm } from '../forms/form-buy-tickets'
 import { Ban, Pencil, Ticket, X } from 'lucide-react'
 import { Button } from '../button'
-
 import {
   Dialog,
   DialogClose,
@@ -11,10 +14,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/shadcn-ui/dialog'
-import { useEffect, useState } from 'react'
-import { usePersonForm } from '@/hooks/use-person-form'
-import { TicketForm } from '../forms/form-buy-tickets'
-import { useTicketParam } from '@/hooks/use-ticket-param'
 
 export function TicketCardActions() {
   return (
