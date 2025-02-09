@@ -64,6 +64,12 @@ export function FormRegister() {
             {formState.errors.Password.message}
           </p>
         )}
+        <Input
+          type='password'
+          placeholder='Digite seu CPF'
+          variant='minimalist'
+          {...register('CPF')}
+        />
       </div>
       <a
         href='/auth/forgot-password'
