@@ -17,5 +17,9 @@ export type City = {
 
 export type TicketFiltersResponse = {
   Description: string
-  response: Ticket[]
+  response: {
+    response: Ticket[]
+    totalTravels: number
+    totalPages: 2
+  }
 }

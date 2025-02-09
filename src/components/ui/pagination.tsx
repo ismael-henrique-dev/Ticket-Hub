@@ -1,8 +1,10 @@
+'use client'
+
 import {
   Pagination as PaginationContainer,
   PaginationContent,
   PaginationEllipsis,
-  PaginationItem,
+  PaginationItem, 
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
@@ -10,40 +12,48 @@ import {
 
 type PaginationProps = {
   currentPage: number
+  totalPages: number
 }
 
-export function Pagination(props: PaginationProps) {
+export function Pagination({ currentPage, totalPages }: PaginationProps) {
+  // colocar loading aqui
+
   return (
     <PaginationContainer>
       <PaginationContent>
-        {props.currentPage > 1 && (
+        {currentPage > 1 && (
           <>
             <PaginationItem>
-              <PaginationPrevious href={`?page=${props.currentPage - 1}`} />
+              <PaginationPrevious href={`?page=${currentPage - 1}`} />
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href={`?page=${props.currentPage - 1}`}>
-                {props.currentPage - 1}
+              <PaginationLink href={`?page=${currentPage - 1}`}>
+                {currentPage - 1}
               </PaginationLink>
             </PaginationItem>
           </>
         )}
         <PaginationItem>
-          <PaginationLink href={`?page=${props.currentPage}`} isActive={true}>
-            {props.currentPage}
+          <PaginationLink href={`?page=${currentPage}`} isActive={true}>
+            {currentPage}
           </PaginationLink>
         </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href={`?page=${props.currentPage + 1}`}>
-            {props.currentPage + 1}
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href={`?page=${props.currentPage + 1}`} />
-        </PaginationItem>
+
+        {totalPages !== currentPage && (
+          <>
+            <PaginationItem>
+              <PaginationLink href={`?page=${currentPage + 1}`}>
+                {currentPage + 1}
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href={`?page=${currentPage + 1}`} />
+            </PaginationItem>
+          </>
+        )}
       </PaginationContent>
     </PaginationContainer>
   )

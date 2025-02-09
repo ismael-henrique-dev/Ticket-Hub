@@ -10,6 +10,7 @@ import { useSearchParams } from 'next/navigation'
 
 export function TicketsListHome() {
   const [ticketList, setTicketList] = useState<Ticket[]>([])
+  const [totalPages, setTotalPages] = useState(1)
   const searchParams = useSearchParams()
   const page = searchParams.get('page') || '1'
 
@@ -17,11 +18,14 @@ export function TicketsListHome() {
     async function getFetchTickes() {
       const data = await fetchTickes(Number(page))
 
-      setTicketList(data.response)
+      setTicketList(data.response.response)
+      setTotalPages(data.response.totalPages)
     }
 
     getFetchTickes()
-  }, [page])
+    console.log("Current Page: " + page)
+    console.log("TotalPages: " + totalPages)
+  }, [page, totalPages])
 
   return (
     <div className='flex flex-col gap-8'>
@@ -32,11 +36,7 @@ export function TicketsListHome() {
               <TicketCard.Info
                 infoTitle={`${ticket.BeginningPoint.Name} - ${ticket.FinishingPoint.Name}`}
               >
-                <TicketCard.Icon
-                  Icon={MapPinHouse}
-                  variant='primary'
-          
-                />
+                <TicketCard.Icon Icon={MapPinHouse} variant='primary' />
               </TicketCard.Info>
               <TicketCard.Info
                 infoTitle={formattedRelativeDate(ticket.TravelDay)}
@@ -61,7 +61,7 @@ export function TicketsListHome() {
           </TicketCard.Root>
         ))}
       </section>
-      <Pagination currentPage={Number(page)} />
+      <Pagination currentPage={Number(page)} totalPages={totalPages} />
     </div>
   )
 }
