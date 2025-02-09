@@ -13,19 +13,18 @@ export function TicketsListHome() {
   const [totalPages, setTotalPages] = useState(1)
   const searchParams = useSearchParams()
   const page = searchParams.get('page') || '1'
+  // const transportType = searchParams.get('transportType')
 
   useEffect(() => {
-    async function getFetchTickes() {
-      const data = await fetchTickes(Number(page))
+    async function getTickes() {
+      const data = await fetchTickes(page)
 
       setTicketList(data.response.response)
       setTotalPages(data.response.totalPages)
     }
 
-    getFetchTickes()
-    console.log("Current Page: " + page)
-    console.log("TotalPages: " + totalPages)
-  }, [page, totalPages])
+    getTickes()
+  }, [page])
 
   return (
     <div className='flex flex-col gap-8'>

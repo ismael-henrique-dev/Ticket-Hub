@@ -1,6 +1,8 @@
-import { TicketFiltersList } from '@/components/home'
-import { TicketsListMyTickets } from '@/components/my-tickets'
-import { Pagination, Search } from '@/components/ui'
+import {
+  TicketListFilters,
+  TicketsListMyTickets,
+} from '@/components/my-tickets'
+import { Search } from '@/components/ui'
 
 export default function MyTickets() {
   return (
@@ -13,15 +15,14 @@ export default function MyTickets() {
     //     </div>
     //   </div>
     // </main>
-     <main className='flex flex-col gap-16 md:p-20 p-4'>
-          <Search />
-          <div className='flex flex-1 justify-between gap-16 md:flex-row flex-col-reverse'>
-            <div className='flex flex-1 flex-col gap-8'>
-            <TicketsListMyTickets />
-              <Pagination currentPage={1}/>
-            </div>
-            <TicketFiltersList />
-          </div>
-        </main>
+    <main className='flex flex-col gap-16 md:p-20 p-4'>
+      <Search />
+      <div className='flex flex-1 justify-between gap-16 md:flex-row flex-col-reverse'>
+        <div className='flex flex-1 flex-col gap-8'>
+          <TicketsListMyTickets />
+        </div>
+        <TicketListFilters />
+      </div>
+    </main>
   )
 }

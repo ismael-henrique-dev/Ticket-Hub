@@ -1,4 +1,4 @@
-import { TicketFiltersList, TicketsListHome } from '@/components/home'
+import { TicketsListHome, TicketListFilters } from '@/components/home'
 import { Search } from '@/components/ui'
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
         <div className='flex flex-1 flex-col gap-8'>
           <TicketsListHome />
         </div>
-        <TicketFiltersList />
+        <TicketListFilters />
       </div>
     </main>
   )

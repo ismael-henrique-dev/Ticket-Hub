@@ -1,11 +1,12 @@
+import { setors } from '@/constants'
 import { TicketFilter } from './ticket-filter'
 
-export function TicketFiltersList() {
+export function TicketListFilters() {
   return (
     <TicketFilter.Root>
       <TicketFilter.Item>
         <TicketFilter.Label>Preço</TicketFilter.Label>
-        <TicketFilter.Select></TicketFilter.Select>
+        <TicketFilter.Select data={[]} filterName='price' />
       </TicketFilter.Item>
       <TicketFilter.Item>
         <TicketFilter.Label>Data</TicketFilter.Label>
@@ -21,8 +22,8 @@ export function TicketFiltersList() {
       </TicketFilter.Item>
       <TicketFilter.Item>
         <TicketFilter.Label>Setor</TicketFilter.Label>
-        <TicketFilter.Select></TicketFilter.Select>
-      </TicketFilter.Item>  
+        <TicketFilter.Select data={setors} filterName='transportType' />
+      </TicketFilter.Item>
     </TicketFilter.Root>
   )
 }

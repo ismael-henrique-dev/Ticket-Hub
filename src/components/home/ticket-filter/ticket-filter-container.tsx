@@ -9,7 +9,7 @@ export function TicketFilterContainer({
   ...rest
 }: TicketFilterContainerProps) {
   return (
-    <section className='flex md:flex-col gap-6 max-w-full overflow-scroll' {...rest}>
+    <section className='flex md:flex-col gap-6 p-2 max-w-full overflow-scroll' {...rest}>
       {children}
     </section>
   )
