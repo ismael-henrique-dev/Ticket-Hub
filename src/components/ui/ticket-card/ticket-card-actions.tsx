@@ -45,7 +45,13 @@ export function PersonDatailsComponent({
   )
 }
 
-export function TicketCardReservationModal() {
+type TicketCardReservationModalProps = {
+  ticketId: string
+}
+
+export function TicketCardReservationModal({
+  ticketId,
+}: TicketCardReservationModalProps) {
   const [open, setOpen] = useState(false)
   const [openForm, setOpenForm] = useState(false)
   const { personsList, handleSubmitData } = usePersonForm()
@@ -62,7 +68,11 @@ export function TicketCardReservationModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant='default' onClick={() => setParam('121212')}>
+        <Button
+          variant='default'
+          className='max-w-8'
+          onClick={() => setParam(ticketId)}
+        >
           Reservar
           <Ticket size={20} />
         </Button>

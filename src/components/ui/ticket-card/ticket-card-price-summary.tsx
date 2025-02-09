@@ -3,6 +3,7 @@
 import clsx from 'clsx'
 import { BusFront, Plane, Ship, Train } from 'lucide-react'
 import { TicketCard } from '.'
+import { priceFormatter } from '@/lib/formatter'
 
 
 interface TicketCardPriceSummaryProps {
@@ -35,7 +36,7 @@ export function TicketCardPriceSummary({
           'text-orange-500': variant === 'primary',
         })}
       >
-        {price}
+        {priceFormatter.format(price)}
       </strong>
     </div>
   )
