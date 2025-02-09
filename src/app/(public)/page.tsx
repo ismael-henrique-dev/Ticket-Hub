@@ -1,5 +1,5 @@
 import { TicketFiltersList, TicketsListHome } from '@/components/home'
-import { PaginationDemo, Search } from '@/components/ui'
+import { Search } from '@/components/ui'
 
 export default function Home() {
   return (
@@ -8,7 +8,6 @@ export default function Home() {
       <div className='flex flex-1 justify-between gap-16 md:flex-row flex-col-reverse'>
         <div className='flex flex-1 flex-col gap-8'>
           <TicketsListHome />
-          <PaginationDemo />
         </div>
         <TicketFiltersList />
       </div>

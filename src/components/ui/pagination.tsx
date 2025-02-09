@@ -1,38 +1,50 @@
 import {
-  Pagination,
+  Pagination as PaginationContainer,
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "../shadcn-ui/pagination"
+} from '../shadcn-ui/pagination'
 
-export function PaginationDemo() {
+type PaginationProps = {
+  currentPage: number
+}
+
+export function Pagination(props: PaginationProps) {
   return (
-    <Pagination>
+    <PaginationContainer>
       <PaginationContent>
+        {props.currentPage > 1 && (
+          <>
+            <PaginationItem>
+              <PaginationPrevious href={`?page=${props.currentPage - 1}`} />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href={`?page=${props.currentPage - 1}`}>
+                {props.currentPage - 1}
+              </PaginationLink>
+            </PaginationItem>
+          </>
+        )}
         <PaginationItem>
-          <PaginationPrevious href="#" />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#" isActive={true}>
-            2
+          <PaginationLink href={`?page=${props.currentPage}`} isActive={true}>
+            {props.currentPage}
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
+          <PaginationLink href={`?page=${props.currentPage + 1}`}>
+            {props.currentPage + 1}
+          </PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationEllipsis />
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext href="#" />
+          <PaginationNext href={`?page=${props.currentPage + 1}`} />
         </PaginationItem>
       </PaginationContent>
-    </Pagination>
+    </PaginationContainer>
   )
 }
