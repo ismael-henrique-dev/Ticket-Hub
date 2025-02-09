@@ -1,10 +1,10 @@
 import { TicketFiltersResponse } from '@/types/ticket'
 import { api } from '../api'
 
-export async function fetchTickes(page:number, transportType?: string, afterDay?: string): Promise<TicketFiltersResponse> {
+export async function fetchTickes(page:string, transportType?: string | null, afterDay?: string): Promise<TicketFiltersResponse> {
   try {
     const { data } = await api.patch('app/travel/filter', {
-      Page: page,
+      Page: Number(page),
       RouteKind: transportType,
       afterDay: afterDay,
     })

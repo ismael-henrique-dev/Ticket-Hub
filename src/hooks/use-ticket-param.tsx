@@ -8,17 +8,16 @@ export function useTicketParam() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  // Salva os searchParams iniciais apenas na primeira renderização
   const initialSearchParamsRef = useRef(searchParams.toString())
 
   function setParam(ticketId: string) {
-    const params = new URLSearchParams(searchParams.toString()) // Usa o valor atualizado
+    const params = new URLSearchParams(searchParams.toString()) 
     params.set('ticket', ticketId)
     router.replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
   const deleteParam = useCallback(() => {
-    const params = new URLSearchParams(initialSearchParamsRef.current) // Usa o valor fixo
+    const params = new URLSearchParams(initialSearchParamsRef.current)
     params.delete('ticket')
     router.replace(`${pathname}?${params.toString()}`, { scroll: false })
   }, [pathname, router])
