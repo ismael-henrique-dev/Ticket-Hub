@@ -68,13 +68,9 @@ export function TicketCardReservationModal({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button
-          variant='default'
-          className='max-w-8'
-          onClick={() => setParam(ticketId)}
-        >
+        <Button variant='default' onClick={() => setParam(ticketId)}>
           Reservar
-          <Ticket size={20} />
+          <Ticket className='md:text-xl text-base' />
         </Button>
       </DialogTrigger>
       <DialogContent className='sm:max-w-lg'>

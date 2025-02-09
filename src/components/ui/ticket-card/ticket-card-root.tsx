@@ -9,7 +9,7 @@ export function TicketCardRoot({ children, variant }: TicketCardRootProps) {
   return (
     <div
       className={clsx(
-        'border-2 border-orange-500 rounded-3xl p-6 flex justify-between',
+        'border-2 border-orange-500 rounded-3xl p-6 flex justify-between gap-2',
         {
           'bg-orange-500 text-zinc-50': variant === 'secondary',
         }

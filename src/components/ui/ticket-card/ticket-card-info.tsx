@@ -7,7 +7,7 @@ export function TicketCardInfo({ children, infoTitle }: TicketCardInfoProps) {
   return (
     <div className='flex items-center gap-4'>
       {children}
-      <span className='text-xl font-medium'>{infoTitle}</span>
+      <span className='md:text-xl font-medium'>{infoTitle}</span>
     </div>
   )
 }

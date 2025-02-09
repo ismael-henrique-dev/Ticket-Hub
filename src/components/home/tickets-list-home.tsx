@@ -35,7 +35,7 @@ export function TicketsListHome() {
                 <TicketCard.Icon
                   Icon={MapPinHouse}
                   variant='primary'
-                  size={40}
+          
                 />
               </TicketCard.Info>
               <TicketCard.Info
