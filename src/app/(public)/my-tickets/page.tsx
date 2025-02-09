@@ -18,7 +18,7 @@ export default function MyTickets() {
           <div className='flex flex-1 justify-between gap-16 md:flex-row flex-col-reverse'>
             <div className='flex flex-1 flex-col gap-8'>
             <TicketsListMyTickets />
-              <Pagination />
+              <Pagination currentPage={1}/>
             </div>
             <TicketFiltersList />
           </div>

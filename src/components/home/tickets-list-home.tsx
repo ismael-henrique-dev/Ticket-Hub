@@ -13,13 +13,13 @@ export function TicketsListHome() {
   const searchParams = useSearchParams()
   const page = searchParams.get('page') || '1'
 
-  async function getFetchTickes() {
-    const data = await fetchTickes(Number(page))
-
-    setTicketList(data.response)
-  }
-
   useEffect(() => {
+    async function getFetchTickes() {
+      const data = await fetchTickes(Number(page))
+
+      setTicketList(data.response)
+    }
+
     getFetchTickes()
   }, [page])
 
