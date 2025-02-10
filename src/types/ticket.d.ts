@@ -7,12 +7,15 @@ export type City = {
   Airports: boolean
 }
 
+export type TransportType = 'Air' | 'Rail' | 'Land' | 'Naval'
+
 export type Ticket = {
   CompanyName: string
   BeginningPoint: City
   FinishingPoint: City
   TravelBasePrice: number
   TravelDay: string
+  Transport: TransportType
   Id: string
 }
 

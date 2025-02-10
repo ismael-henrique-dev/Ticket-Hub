@@ -19,13 +19,22 @@ type TicketFilterSelectProps = {
   filterName: string
 }
 
-export function TicketFilterSelect({ data, filterName }: TicketFilterSelectProps) {
+export function TicketFilterSelect({
+  data,
+  filterName,
+}: TicketFilterSelectProps) {
   const [value, setValue] = useState('')
-  const { setFilter } = useFilters()
+  const { setFilter, deleteFilter } = useFilters()
 
   const handleChange = (selectedValue: string) => {
+    if (selectedValue === 'All') {
+      deleteFilter('transportType')
+    } else {
+      setFilter(filterName, selectedValue)
+    }
+
     setValue(selectedValue)
-    setFilter(filterName, selectedValue)
+
     console.log('Valor do select: ' + selectedValue)
     console.log('Valor do useState: ' + value)
   }
@@ -39,7 +48,7 @@ export function TicketFilterSelect({ data, filterName }: TicketFilterSelectProps
         </div>
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value={'a'}>Nenhum</SelectItem>
+        <SelectItem value={'All'}>Todos</SelectItem>
         {data.map((option) => (
           <SelectItem key={option.value} value={option.value}>
             {option.label}

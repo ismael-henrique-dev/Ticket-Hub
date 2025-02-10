@@ -7,7 +7,7 @@ import { priceFormatter } from '@/lib/formatter'
 
 
 interface TicketCardPriceSummaryProps {
-  transportType: 'train' | 'bus' | 'airplane' | 'ship'
+  transportType: 'Air' | 'Rail' | 'Land' | 'Naval'
   variant: 'primary' | 'secondary'
   price: number
 }
@@ -19,16 +19,16 @@ export function TicketCardPriceSummary({
 }: TicketCardPriceSummaryProps) {
   return (
     <div className='flex flex-col justify-between items-end'>
-      {transportType === 'ship' && (
+      {transportType === 'Naval' && (
         <TicketCard.Icon variant={variant} Icon={Ship} />
       )}
-      {transportType === 'bus' && (
+      {transportType === 'Land' && (
         <TicketCard.Icon variant={variant} Icon={BusFront} />
       )}
-      {transportType === 'airplane' && (
+      {transportType === 'Air' && (
         <TicketCard.Icon variant={variant} Icon={Plane} />
       )}
-      {transportType === 'train' && (
+      {transportType === 'Rail' && (
         <TicketCard.Icon variant={variant} Icon={Train} />
       )}
       <strong

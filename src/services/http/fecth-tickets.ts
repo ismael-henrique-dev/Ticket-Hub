@@ -1,13 +1,29 @@
-import { TicketFiltersResponse } from '@/types/ticket'
+import { TicketFiltersResponse, TransportType } from '@/types/ticket'
 import { api } from '../api'
 
-export async function fetchTickes(page:string, transportType?: string | null, afterDay?: string): Promise<TicketFiltersResponse> {
+type RequestBody = {
+  Page: number
+  after?: string
+  RouteKind?: TransportType
+}
+
+export async function fetchTickes(
+  page: string,
+  transportType: string | null,
+  afterDay?: string
+): Promise<TicketFiltersResponse> {
   try {
-    const { data } = await api.patch('app/travel/filter', {
-      Page: Number(page),
-      RouteKind: transportType,
-      afterDay: afterDay,
-    })
+    const requestBody: RequestBody = { Page: Number(page) }
+
+    if (afterDay) {
+      requestBody.after = afterDay
+    }
+
+    if (transportType && transportType !== 'All') {
+      requestBody.RouteKind = transportType as TransportType
+    }
+
+    const { data } = await api.patch('app/travel/filter', requestBody)
 
     return data
   } catch (error) {

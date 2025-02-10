@@ -16,7 +16,7 @@ export function useFilters() {
     router.replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
-  const deleteParam = useCallback(
+  const deleteFilter = useCallback(
     (key: string) => {
       const params = new URLSearchParams(initialSearchParamsRef.current)
       params.delete(key)
@@ -27,6 +27,6 @@ export function useFilters() {
 
   return {
     setFilter,
-    deleteParam,
+    deleteFilter,
   }
 }
