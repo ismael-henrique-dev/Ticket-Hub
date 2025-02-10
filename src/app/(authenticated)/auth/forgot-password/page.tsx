@@ -17,8 +17,8 @@ const forgotPasswordFormSchema = z.object({
 type ForgotPasswordFormData = z.infer<typeof forgotPasswordFormSchema>
 
 export default function ForgotPassword() {
-  const { back, push } = useRouter()
-  const { register, handleSubmit } = useForm<ForgotPasswordFormData>({
+  const { back } = useRouter()
+  const { register } = useForm<ForgotPasswordFormData>({
     resolver: zodResolver(forgotPasswordFormSchema),
   })
 

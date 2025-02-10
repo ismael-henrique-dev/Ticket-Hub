@@ -1,11 +1,13 @@
 import { Lock, Mail, UserRound } from 'lucide-react'
 import { Button } from '../button'
 import { Input } from '../input'
+import { User } from '@/types/user'
 
 type FormAccountProps = {
-  data: any
+  data: User
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function FormAccount({ data }: FormAccountProps) {
   return (
     <form

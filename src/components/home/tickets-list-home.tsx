@@ -15,17 +15,18 @@ export function TicketsListHome() {
   const searchParams = useSearchParams()
   const page = searchParams.get('page') || '1'
   const transportType = searchParams.get('transportType')
+  const startDay = searchParams.get('ticketFinishDay')
 
   useEffect(() => {
     async function getTickes() {
-      const data = await fetchTickes(page, transportType)
+      const data = await fetchTickes(page, transportType, )
 
       setTicketList(data.response.response)
       setTotalPages(data.response.totalPages)
     }
 
     getTickes()
-  }, [page, transportType])
+  }, [page, transportType, startDay])
 
   return (
     <div className='flex flex-col gap-8'>

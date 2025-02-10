@@ -33,7 +33,7 @@ export function TicketsListMyTickets() {
           </TicketCard.Content>
           <TicketCard.PriceSummary
             variant='secondary'
-            transportType='ship'
+            transportType='Air'
             price={200}
           />
         </TicketCard.Root>
