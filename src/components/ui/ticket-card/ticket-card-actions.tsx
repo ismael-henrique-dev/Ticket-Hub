@@ -14,6 +14,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/shadcn-ui/dialog'
+import { priceFormatter } from '@/lib/formatter'
 
 export function TicketCardActions() {
   return (
@@ -40,17 +41,21 @@ export function PersonDatailsComponent({
   return (
     <div className='flex items-center justify-between w-full px-4'>
       <span className='text-sm text-zinc-500'>{name}</span>
-      <span className='text-sm text-zinc-500'>R$ {ticketPrice}</span>
+      <span className='text-sm text-zinc-500'>
+        {priceFormatter.format(ticketPrice)}
+      </span>
     </div>
   )
 }
 
 type TicketCardReservationModalProps = {
   ticketId: string
+  basePrice: number
 }
 
 export function TicketCardReservationModal({
   ticketId,
+  basePrice,
 }: TicketCardReservationModalProps) {
   const [open, setOpen] = useState(false)
   const [openForm, setOpenForm] = useState(false)
@@ -58,6 +63,11 @@ export function TicketCardReservationModal({
   const { setParam, deleteParam } = useTicketParam()
 
   const maxPersonsQuantity = personsList.length !== 3
+
+  const totalPrice = personsList.reduce((total, person) => {
+    const ticketPrice = person.age < 18 ? basePrice * 0.5 : basePrice
+    return total + ticketPrice
+  }, 0)
 
   useEffect(() => {
     if (!open) {
@@ -83,12 +93,12 @@ export function TicketCardReservationModal({
         <div className='flex flex-col items-center gap-8 p-8 border border-zinc-300 rounded-xl'>
           <h2 className='font-semibold'>Resumo</h2>
           <strong className='text-orange-500 text-2xl font-semibold'>
-            R$ 440,00
+            {priceFormatter.format(totalPrice)}
           </strong>
           {personsList.map((person, index) => (
             <PersonDatailsComponent
               name={person.name}
-              ticketPrice={person.age}
+              ticketPrice={person.age < 18 ? basePrice * 0.5 : basePrice}
               key={index}
             />
           ))}

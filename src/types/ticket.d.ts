@@ -1,11 +1,3 @@
-export type Ticket = {
-  BeginningPoint: City
-  FinishingPoint: City
-  TravelBasePrice: number
-  TravelDay: string
-  Id: string
-}
-
 export type City = {
   Id: string
   Name: string
@@ -13,6 +5,15 @@ export type City = {
   Ports: boolean
   Railroads: boolean
   Airports: boolean
+}
+
+export type Ticket = {
+  CompanyName: string
+  BeginningPoint: City
+  FinishingPoint: City
+  TravelBasePrice: number
+  TravelDay: string
+  Id: string
 }
 
 export type TicketFiltersResponse = {
