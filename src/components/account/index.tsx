@@ -1,1 +1,1 @@
-export { DeleteWarningCard } from './delete-warning-card'
+export { Card } from './card'
