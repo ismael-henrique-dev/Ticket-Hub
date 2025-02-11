@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from '@/components/shadcn-ui/dialog'
 import { priceFormatter } from '@/lib/formatter'
+import { createTicket } from '@/services/http/auth/create-ticket'
 
 export function TicketCardActions() {
   return (
@@ -65,7 +66,7 @@ export function TicketCardReservationModal({
   const maxPersonsQuantity = personsList.length !== 3
 
   const totalPrice = personsList.reduce((total, person) => {
-    const ticketPrice = person.age < 18 ? basePrice * 0.5 : basePrice
+    const ticketPrice = person.Age < 18 ? basePrice * 0.5 : basePrice
     return total + ticketPrice
   }, 0)
 
@@ -74,6 +75,16 @@ export function TicketCardReservationModal({
       deleteParam()
     }
   }, [open, deleteParam])
+
+  const ticket = {
+    TravelId: ticketId,
+    CompanionsList: personsList // Supondo que seja um array de `Person`
+  }
+
+  async function handleCreateTicket() {
+    await createTicket(ticket)
+    localStorage.removeItem('@personsList')
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -97,8 +108,8 @@ export function TicketCardReservationModal({
           </strong>
           {personsList.map((person, index) => (
             <PersonDatailsComponent
-              name={person.name}
-              ticketPrice={person.age < 18 ? basePrice * 0.5 : basePrice}
+              name={person.Name}
+              ticketPrice={person.Age < 18 ? basePrice * 0.5 : basePrice}
               key={index}
             />
           ))}
@@ -108,7 +119,7 @@ export function TicketCardReservationModal({
                 {openForm ? 'Cancelar' : 'Adicionar acompanhantes'}
               </Button>
             )}
-            <Button variant='simple-orange'>Reservar passagens</Button>
+            <Button variant='simple-orange' onClick={handleCreateTicket}>Reservar passagens</Button>
           </div>
           <div className='flex-1 flex flex-col w-full gap-4'>
             {openForm && maxPersonsQuantity && (

@@ -13,20 +13,21 @@ export function TicketsListHome() {
   const [ticketList, setTicketList] = useState<Ticket[]>([])
   const [totalPages, setTotalPages] = useState(1)
   const searchParams = useSearchParams()
-  const page = searchParams.get('page') || '1'
-  const transportType = searchParams.get('transportType')
-  const startDay = searchParams.get('ticketFinishDay')
+  const page = searchParams.get('page') || '1' as string
+  const transportType = searchParams.get('transportType') as string
+  const afterDay = searchParams.get('afterDay') as string
+  const beforeDay = searchParams.get('beforeDay') as string
 
   useEffect(() => {
     async function getTickes() {
-      const data = await fetchTickes(page, transportType, )
+      const data = await fetchTickes(page, transportType, afterDay, beforeDay)
 
       setTicketList(data.response.response)
       setTotalPages(data.response.totalPages)
     }
 
     getTickes()
-  }, [page, transportType, startDay])
+  }, [page, transportType, afterDay, beforeDay])
 
   return (
     <div className='flex flex-col gap-8'>

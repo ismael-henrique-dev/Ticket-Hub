@@ -5,14 +5,14 @@ type RequestBody = {
   Page: number
   after?: string
   RouteKind?: TransportType
-  beforeDay?: string | null
+  beforeDay?: string
 }
 
 export async function fetchTickes(
   page: string,
   transportType: string | null,
-  afterDay?: string,
-  beforeDay?: string
+  afterDay: string,
+  beforeDay: string
 ): Promise<TicketFiltersResponse> {
   try {
     const requestBody: RequestBody = { Page: Number(page) }
