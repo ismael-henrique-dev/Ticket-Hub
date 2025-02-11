@@ -5,9 +5,9 @@ import { Person } from '@/types/person'
 import { z } from 'zod'
 
 export const createTicketFormSchema = z.object({
-  name: z.string().min(1),
-  age: z.number(),
-  cpf: z.string(),
+  Name: z.string().min(1),
+  Age: z.number(),
+  CPF: z.string(),
 })
 
 export type CreateTicketFormSchema = z.infer<typeof createTicketFormSchema>

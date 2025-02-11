@@ -26,19 +26,19 @@ export function TicketForm({ submitFunction }: TicketFormProps) {
         variant='minimalist'
         placeholder='Nome'
         type='text'
-        {...register('name')}
+        {...register('Name')}
       />
       <Input
         variant='minimalist'
         placeholder='Idade'
         type='number'
-        {...register('age', { valueAsNumber: true })}
+        {...register('Age', { valueAsNumber: true })}
       />
       <Input
         variant='minimalist'
         type='text'
         placeholder='CPF'
-        {...register('cpf')}
+        {...register('CPF')}
       />
       <Button type='submit' variant='simple-orange'>
         Confirmar

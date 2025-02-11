@@ -1,6 +1,6 @@
 export type Person = {
-  name: string
-  age: number
-  cpf: string
+  Name: string
+  Age: number
+  CPF: string
 }
 
