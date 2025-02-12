@@ -4,9 +4,9 @@ import { api } from '@/services/api'
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 import { cookies } from 'next/headers'
 
-type RegisterUserResponse = {
+type CreateTicketResponse = {
   Description: string
-  UserToken: string
+  Client: string
 }
 
 export type TicketFormData = {
@@ -14,11 +14,12 @@ export type TicketFormData = {
   Age: number
   CPF: string
   IsCompanion: boolean
+  PersonName: string
 }
 
 export async function createTicketByMyTicket(
   formData: TicketFormData
-): Promise<RegisterUserResponse> {
+): Promise<CreateTicketResponse> {
   try {
     const cookie = await cookies()
     const token = cookie.get('userId') as RequestCookie

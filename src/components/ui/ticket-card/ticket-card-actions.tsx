@@ -24,6 +24,7 @@ import {
 } from '@/services/http/fecth-clents-by-ticket'
 import { deleteCLientById } from '@/services/http/delete-client-by-id'
 import { editClient } from '@/services/http/update-client-by-id'
+import { showErrorToast, showSuccessToast } from '../toasts'
 // import { editClient } from '@/services/http/update-client-by-id'
 
 export function TicketCardActions({
@@ -35,15 +36,18 @@ export function TicketCardActions({
   const [openEditForm, setOpenEditForm] = useState(false)
   const [personsList, setPersonsList] = useState<Client[]>([])
 
-  const [userUpdateData, setUserUpdateData] = useState<Person | null>(null)
+  // const [userUpdateData, setUserUpdateData] = useState<Person | null>(null)
+  const [selectedClientId, setSelectedClientId] = useState<string | null>(null)
 
   useEffect(() => {
     async function getClients() {
       const data = await fetchClientsByTicketId(ticketId)
+      console.log(data.Client)
       setPersonsList(data.Client)
     }
 
     getClients()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const { setParam, deleteParam } = useTicketParam()
@@ -62,57 +66,106 @@ export function TicketCardActions({
   }, [open, deleteParam])
 
   async function handleSubmitData(data: Person) {
-    const ticket = {
+    try {
+      const ticket = {
+        TicketId: ticketId,
+        Age: data.Age,
+        CPF: data.CPF,
+        IsCompanion: true,
+        PersonName: data.Name,
+      }
+
+      await createTicketByMyTicket(ticket)
+
+      const newClient: Client = {
+        IsCompanion: true,
+        PersonName: data.Name,
+        Age: data.Age,
+        CPF: data.CPF,
+      }
+
+      setPersonsList((prevPersonsList) => [...prevPersonsList, newClient])
+      showSuccessToast('Acompanhente adicionado com sucesso!')
+    } catch {
+      showErrorToast('Error ao adicionar acompanhante')
+    }
+  }
+
+  async function handleDeleteClientById(id: string) {
+    try {
+      await deleteCLientById(id)
+      const newClientsList = personsList.filter((client) => client.Id !== id)
+      setPersonsList(newClientsList)
+      showSuccessToast('Acompanhente deletado com sucesso!')
+    } catch {
+      showErrorToast('Erro ao deletar acompanhente!')
+    }
+  }
+
+  async function handleOpenEditForm(clientId: string) {
+    setSelectedClientId(clientId)
+    setOpenEditForm(true)
+  }
+
+  async function handleSubmitEditData(data: Person) {
+    if (!selectedClientId) return
+
+    const updatedTicket = {
       TicketId: ticketId,
       Age: data.Age,
       CPF: data.CPF,
       IsCompanion: true,
-    }
-
-    await createTicketByMyTicket(ticket)
-
-    const newClient: Client = {
-      IsCompanion: true,
       PersonName: data.Name,
-      Age: data.Age,
-      CPF: data.CPF,
     }
 
-    setPersonsList((prevPersonsList) => [...prevPersonsList, newClient])
-  }
-
-  async function handleDeleteClientById(id: string) {
-    console.log(id)
-    await deleteCLientById(id)
-  }
-
-  function handleSubmitEditData(data: Person) {
-    setUserUpdateData(data)
-  }
-
-  async function handleOpenEditForm(clientId: string) {
-    setOpenEditForm(!openEditForm)
-
-    if (userUpdateData) {
-      const updatedTicket = {
-        TicketId: ticketId,
-        Age: userUpdateData.Age,
-        CPF: userUpdateData.CPF,
-        IsCompanion: true,
-      }
-
-      try {
-        await editClient(clientId, updatedTicket)
-        setPersonsList((prevList) =>
-          prevList.map((client) =>
-            client.Id === clientId ? { ...client, ...updatedTicket } : client
-          )
+    try {
+      await editClient(selectedClientId, updatedTicket)
+      setPersonsList((prevList) =>
+        prevList.map((client) =>
+          client.Id === selectedClientId
+            ? { ...client, ...updatedTicket }
+            : client
         )
-      } catch (error) {
-        console.error('Erro ao editar cliente:', error)
-      }
+      )
+      setOpenEditForm(false)
+      setSelectedClientId(null)
+      showSuccessToast('Acompanhante atualizado com sucesso!')
+    } catch (error) {
+      console.error('Erro ao editar cliente:', error)
+      showErrorToast('Erro ao editar as informações di cliente!')
     }
   }
+
+  // function handleSubmitEditData(data: Person) {
+  //   setUserUpdateData(data)
+  // }
+
+  // async function handleOpenEditForm(clientId: string) {
+  //   setOpenEditForm(!openEditForm)
+
+  //   if (userUpdateData) {
+  //     const updatedTicket = {
+  //       TicketId: ticketId,
+  //       Age: userUpdateData.Age,
+  //       CPF: userUpdateData.CPF,
+  //       IsCompanion: true,
+  //       PersonName: userUpdateData.Name,
+  //     }
+
+  //     console.log(userUpdateData)
+
+  //     try {
+  //       await editClient(clientId, updatedTicket)
+  //       setPersonsList((prevList) =>
+  //         prevList.map((client) =>
+  //           client.Id === clientId ? { ...client, ...updatedTicket } : client
+  //         )
+  //       )
+  //     } catch (error) {
+  //       console.error('Erro ao editar cliente:', error)
+  //     }
+  //   }
+  // }
 
   return (
     <div className='bg-zinc-50 p-3 flex items-center justify-center w-24 gap-4 rounded-xl'>
@@ -139,6 +192,7 @@ export function TicketCardActions({
             </strong>
             {personsList.map((person, index) => (
               <PersonDatailsComponent
+                type='edit'
                 name={person.PersonName}
                 ticketPrice={person.Age < 18 ? basePrice * 0.5 : basePrice}
                 key={index}
@@ -161,10 +215,10 @@ export function TicketCardActions({
             </div>
             <div className='flex-1 flex flex-col w-full gap-4'>
               {openCreateForm && maxPersonsQuantity && (
-                <TicketForm submitFunction={handleSubmitData} />
+                <TicketForm submitFunction={handleSubmitData} /> // create
               )}
               {openEditForm && maxPersonsQuantity && (
-                <TicketForm submitFunction={handleSubmitEditData} />
+                <TicketForm submitFunction={handleSubmitEditData} /> // edit
               )}
             </div>
           </div>
@@ -179,6 +233,7 @@ export function TicketCardActions({
 }
 
 export type PersonDatailsComponentProps = {
+  type: 'edit' | 'create'
   name: string
   ticketPrice: number
   onAction?: () => void
@@ -188,6 +243,7 @@ export type PersonDatailsComponentProps = {
 export function PersonDatailsComponent({
   name,
   ticketPrice,
+  type,
   onAction,
   onDeleteClient,
 }: PersonDatailsComponentProps) {
@@ -198,12 +254,16 @@ export function PersonDatailsComponent({
         <span className='text-sm text-zinc-500'>
           {priceFormatter.format(ticketPrice)}
         </span>
-        <button className='text-sm text-zinc-500' onClick={onAction}>
-          <Pencil size={16} />
-        </button>
-        <button className='text-sm text-zinc-500' onClick={onDeleteClient}>
-          <Trash size={16} />
-        </button>
+        {type === 'edit' && (
+          <>
+            <button className='text-sm text-zinc-500' onClick={onAction}>
+              <Pencil size={16} />
+            </button>
+            <button className='text-sm text-zinc-500' onClick={onDeleteClient}>
+              <Trash size={16} />
+            </button>
+          </>
+        )}
       </div>
     </div>
   )
@@ -268,6 +328,7 @@ export function TicketCardReservationModal({
           </strong>
           {personsList.map((person, index) => (
             <PersonDatailsComponent
+              type='create'
               name={person.Name}
               ticketPrice={person.Age < 18 ? basePrice * 0.5 : basePrice}
               key={index}
