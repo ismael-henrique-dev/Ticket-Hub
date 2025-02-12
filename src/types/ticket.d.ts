@@ -24,6 +24,6 @@ export type TicketFiltersResponse = {
   response: {
     response: Ticket[]
     totalTravels: number
-    totalPages: 2
+    totalPages: number
   }
 }

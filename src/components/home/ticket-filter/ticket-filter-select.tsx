@@ -23,7 +23,7 @@ export function TicketFilterSelect({
   data,
   filterName,
 }: TicketFilterSelectProps) {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('All')
   const { setFilter, deleteFilter } = useFilters()
 
   const handleChange = (selectedValue: string) => {
@@ -35,8 +35,6 @@ export function TicketFilterSelect({
 
     setValue(selectedValue)
 
-    console.log('Valor do select: ' + selectedValue)
-    console.log('Valor do useState: ' + value)
   }
 
   return (
@@ -44,7 +42,7 @@ export function TicketFilterSelect({
       <SelectTrigger className='w-80 h-10 bg-orange-500 text-zinc-50 rounded-xl border-none'>
         <div className='flex items-center gap-1'>
           <ArrowDownUp />
-          <SelectValue placeholder='Theme' />
+          <SelectValue placeholder='Todos'defaultValue='All' />
         </div>
       </SelectTrigger>
       <SelectContent>

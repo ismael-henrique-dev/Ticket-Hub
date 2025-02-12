@@ -302,8 +302,13 @@ export function TicketCardReservationModal({
   }
 
   async function handleCreateTicket() {
-    await createTicket(ticket)
-    localStorage.removeItem('@personsList')
+    try {
+      await createTicket(ticket)
+      localStorage.removeItem('@personsList')
+      showSuccessToast('Passagem criada!')
+    } catch {
+      showErrorToast('Erro ao criar passagem!')
+    }
   }
 
   return (

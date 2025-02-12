@@ -4,3 +4,8 @@ export const setors = [
   { value: 'Naval', label: 'Marítimo' },
   { value: 'Rail', label: 'Ferroviário' },
 ]
+
+export const priceTypes = [
+  { value: 'min', label: 'Menor preço' },
+  { value: 'max', label: 'Maior preço' },
+]

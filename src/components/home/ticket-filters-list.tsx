@@ -1,4 +1,4 @@
-import { setors } from '@/constants'
+import { priceTypes, setors } from '@/constants'
 import { TicketFilter } from './ticket-filter'
 
 export function TicketListFilters() {
@@ -6,7 +6,7 @@ export function TicketListFilters() {
     <TicketFilter.Root>
       <TicketFilter.Item>
         <TicketFilter.Label>Preço</TicketFilter.Label>
-        <TicketFilter.Select data={[]} filterName='price' />
+        <TicketFilter.Select data={priceTypes} filterName='priceOrder' />
       </TicketFilter.Item>
       <TicketFilter.Item>
         <TicketFilter.Label>Data</TicketFilter.Label>

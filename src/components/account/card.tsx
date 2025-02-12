@@ -1,4 +1,3 @@
-// import { Info } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '../ui'
 
@@ -24,7 +23,7 @@ export function Card({ Icon, description, buttonText, actionType }: CardProps) {
         </Button>
       )}
       {actionType === 'redirect' && (
-        <Link href='auth/forgot-password' className='bg-orange-500 text-zinc-50 rounded-lg text-sm font-bold px-6 py-2'>
+        <Link href='auth/forgot-password' className='bg-orange-500 text-zinc-50 rounded-lg text-sm font-bold px-6 py-2 flex items-center justify-center transition-all hover:bg-orange-600'>
           {buttonText}
         </Link>
       )}

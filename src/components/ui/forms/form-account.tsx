@@ -14,14 +14,14 @@ type FormAccountProps = {
 }
 
 const updateAccountFormSchema = z.object({
-  Nome: z.string().optional(),
+  Nome: z.string().min(3, 'O nome deve conter pelo menos 3 caracteres.').optional(),
   Email: z.string().email().optional(),
 })
 
 type UpdateAccountFormSchema = z.infer<typeof updateAccountFormSchema>
 
 export function FormAccount({ data }: FormAccountProps) {
-  const { register, watch, handleSubmit } = useForm<UpdateAccountFormSchema>({
+  const { register, watch, handleSubmit, formState } = useForm<UpdateAccountFormSchema>({
     resolver: zodResolver(updateAccountFormSchema),
     defaultValues: {
       Nome: data.Nome,
@@ -85,6 +85,11 @@ export function FormAccount({ data }: FormAccountProps) {
           {...register('Nome')}
           icon={UserRound}
         />
+        {formState.errors.Nome && (
+          <p className='text-red-500 text-xs'>
+            {formState.errors.Nome.message}
+          </p>
+        )}
       </div>
       <div className='flex gap-4'>
         <Button variant='cancel' disabled={!hasChanges}>Cancelar</Button>

@@ -13,21 +13,42 @@ export function TicketsListHome() {
   const [ticketList, setTicketList] = useState<Ticket[]>([])
   const [totalPages, setTotalPages] = useState(1)
   const searchParams = useSearchParams()
-  const page = searchParams.get('page') || '1' as string
+  const page = searchParams.get('page') || ('1' as string)
   const transportType = searchParams.get('transportType') as string
   const afterDay = searchParams.get('afterDay') as string
   const beforeDay = searchParams.get('beforeDay') as string
+  const priceOrder = searchParams.get('priceOrder') as string
+
+  // useEffect(() => {
+  //   async function getTickes() {
+  //     const data = await fetchTickes(page, transportType, afterDay, beforeDay)
+
+  //     setTicketList(data.response.response)
+  //     setTotalPages(data.response.totalPages)
+  //   }
+
+  //   getTickes()
+  // }, [page, transportType, afterDay, beforeDay])
 
   useEffect(() => {
     async function getTickes() {
       const data = await fetchTickes(page, transportType, afterDay, beforeDay)
+      let tickets = data.response.response
 
-      setTicketList(data.response.response)
+      if (priceOrder === 'min') {
+        tickets = tickets.sort((a, b) => a.TravelBasePrice - b.TravelBasePrice)
+      }
+
+      if (priceOrder === 'max') {
+        tickets = tickets.sort((a, b) => b.TravelBasePrice - a.TravelBasePrice)
+      }
+
+      setTicketList(tickets)
       setTotalPages(data.response.totalPages)
     }
 
     getTickes()
-  }, [page, transportType, afterDay, beforeDay])
+  }, [page, transportType, afterDay, beforeDay, priceOrder])
 
   return (
     <div className='flex flex-col gap-8'>

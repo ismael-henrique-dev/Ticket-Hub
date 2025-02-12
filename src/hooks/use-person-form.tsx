@@ -5,9 +5,14 @@ import { Person } from '@/types/person'
 import { z } from 'zod'
 
 export const createTicketFormSchema = z.object({
-  Name: z.string().min(1),
-  Age: z.number(),
-  CPF: z.string(),
+  Name: z.string().min(1, 'Informe o nome.'),
+  Age: z.number().min(0, 'Informe uma idade válida.'),
+  CPF: z
+    .string()
+    .regex(
+      /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/,
+      'CPF inválido. Use o formato 000.000.000-00.'
+    ),
 })
 
 export type CreateTicketFormSchema = z.infer<typeof createTicketFormSchema>
