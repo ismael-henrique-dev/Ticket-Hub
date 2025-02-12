@@ -9,15 +9,23 @@ import {
   registerFormSchema,
   RegisterFormSchema,
 } from '@/validators/register-validators'
+import { useRouter } from 'next/navigation'
+import { showErrorToast, showSuccessToast } from '../toasts'
 
 export function FormRegister() {
+  const { push } = useRouter()
   const { register, handleSubmit, formState } = useForm<RegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
   })
 
   async function handleSubmitFormRegister(data: RegisterFormSchema) {
-    console.log(data)
-    await registerUser(data)
+    try {
+      await registerUser(data)
+      showSuccessToast('Conta criada com sucesso!')
+      push('/auth/login')
+    } catch {
+      showErrorToast('Erro ao criar conta.')
+    }
   }
 
   return (

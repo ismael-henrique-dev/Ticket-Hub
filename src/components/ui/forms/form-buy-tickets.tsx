@@ -6,15 +6,25 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Input } from '../input'
 import { Button } from '../button'
+import { useEffect } from 'react'
 
 type TicketFormProps = {
   submitFunction: (data: Person) => void
+  clientData?: Person
 }
 
-export function TicketForm({ submitFunction }: TicketFormProps) {
-  const { handleSubmit, register } = useForm<Person>({
+export function TicketForm({ submitFunction, clientData }: TicketFormProps) {
+  const { handleSubmit, register, setValue } = useForm<Person>({
     resolver: zodResolver(createTicketFormSchema),
   })
+
+  useEffect(() => {
+    if (clientData) {
+      setValue('Name', clientData.Name)
+      setValue('Age', clientData.Age)
+      setValue('CPF', clientData.CPF)
+    }
+  }, [clientData, setValue])
 
   return (
     <form

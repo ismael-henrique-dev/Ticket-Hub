@@ -6,14 +6,23 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { LoginFormSchema, loginFormSchema } from '@/validators/login-validators'
 import { loginUser } from '@/services/http/auth/login-user'
+import { showErrorToast, showSuccessToast } from '../toasts'
+import { useRouter } from 'next/navigation'
 
 export function FormLogin() {
+  const { push } = useRouter()
   const { register, handleSubmit, formState } = useForm<LoginFormSchema>({
     resolver: zodResolver(loginFormSchema),
   })
 
   async function handleSubmitFormLogin(data: LoginFormSchema) {
-    await loginUser(data)
+    try {
+      await loginUser(data)
+      showSuccessToast('Login efetuado com sucesso!')
+      push('/')
+    } catch {
+      showErrorToast('Credencias incorretas.')
+    }
   }
 
   return (
