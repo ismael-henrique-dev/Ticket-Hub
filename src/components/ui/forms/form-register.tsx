@@ -71,12 +71,6 @@ export function FormRegister() {
           {...register('CPF')}
         />
       </div>
-      <a
-        href='/auth/forgot-password'
-        className='text-center text-balance underline'
-      >
-        Esqueci a senha
-      </a>
       <Button type='submit'>Cadastrar</Button>
     </form>
   )

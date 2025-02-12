@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { sendCodeByEmail } from "@/services/http/auth/send-code-by-emai"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ArrowLeft } from "lucide-react"
@@ -17,22 +18,25 @@ const forgotPasswordFormSchema = z.object({
 type ForgotPasswordFormData = z.infer<typeof forgotPasswordFormSchema>
 
 export default function ForgotPassword() {
-  const { back } = useRouter()
-  const { register } = useForm<ForgotPasswordFormData>({
+  const { back, push } = useRouter()
+  const { register, handleSubmit } = useForm<ForgotPasswordFormData>({
     resolver: zodResolver(forgotPasswordFormSchema),
   })
 
-  // async function handleSendEmail(data: ForgotPasswordFormData) {
-  //   try {
-  //     const response = await sendEmailForResetPassword(data.email)
-  //     const code = response.CodeSent
-  //     Cookies.set("verificationCode", code, { expires: 1 })
-  //     showInfoToast("Código enviado! Verifique na sua caixa de emails.")
-  //     push("forgot-password/send-code")
-  //   } catch {
-  //     showErrorToast("Ops! Algo deu errado ao enviar o código.")
-  //   }
-  // }
+  async function handleSendEmail(data: ForgotPasswordFormData) {
+    try {
+      const response = await sendCodeByEmail(data.email)
+      localStorage.setItem('@code', response.response)
+      console.log(response)
+      push("forgot-password/send-code")
+      // const code = response.CodeSent
+      // Cookies.set("verificationCode", code, { expires: 1 })
+      // showInfoToast("Código enviado! Verifique na sua caixa de emails.")
+      // push("forgot-password/send-code")
+    } catch {
+      // showErrorToast("Ops! Algo deu errado ao enviar o código.")
+    }
+  }
 
   return (
     <div className="flex flex-col text-left justify-center min-h-screen">
@@ -48,7 +52,7 @@ export default function ForgotPassword() {
         </section>
         <form
           action=""
-          // onSubmit={handleSubmit(handleSendEmail)}
+          onSubmit={handleSubmit(handleSendEmail)}
           className="flex flex-col gap-8"
         >
           <div className="flex flex-col gap-3">

@@ -17,20 +17,20 @@ const forgotPasswordFormSchema = z.object({
 type ForgotPasswordFormData = z.infer<typeof forgotPasswordFormSchema>
 
 export default function SendCode() {
-  const { back } = useRouter()
-  const { register} = useForm<ForgotPasswordFormData>({
+  const { back, push } = useRouter()
+  const { register, handleSubmit } = useForm<ForgotPasswordFormData>({
     resolver: zodResolver(forgotPasswordFormSchema),
   })
 
-  // async function handleVeryCode(data: ForgotPasswordFormData) {
-  //   const code = Cookies.get("verificationCode")
-  //   if (code === data.code) {
-  //     showSuccessToast("Código verificado!")
-  //     push("new-password")
-  //   } else {
-  //     showErrorToast("Código inválido!")
-  //   }
-  // }
+  async function handleVeryCode(data: ForgotPasswordFormData) {
+    const code = localStorage.getItem('@code')
+    if (code === data.code) {
+      // showSuccessToast("Código verificado!")
+      push("new-password")
+    } else {
+      // showErrorToast("Código inválido!")
+    }
+  }
 
   return (
     <div className="flex flex-col text-left justify-center min-h-screen">
@@ -46,7 +46,7 @@ export default function SendCode() {
         </section>
         <form
           action=""
-          // onSubmit={handleSubmit(handleVeryCode)}
+          onSubmit={handleSubmit(handleVeryCode)}
           className="flex flex-col gap-8"
         >
           <div className="flex flex-col gap-3">
