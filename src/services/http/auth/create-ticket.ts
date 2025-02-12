@@ -1,5 +1,9 @@
+'use server'
+
 import { api } from '@/services/api'
 import { Person } from '@/types/person'
+import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
+import { cookies } from 'next/headers'
 
 type RegisterUserResponse = {
   Description: string
@@ -11,15 +15,15 @@ export type Ticket = {
   CompanionsList: Person[]
 }
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOTA4Y2ExYi1jMDhmLTQ5Y2MtYWZmYS1jYjVkZGUyMDY1YTciLCJpYXQiOjE3MzkxOTUwMTV9.lFnGh5WErQSPCobxciywIOGdF5jd26pNUScaMyY0JT0'
-
 export async function createTicket(
   formData: Ticket
 ): Promise<RegisterUserResponse> {
   try {
+    const cookie = await cookies()
+    const token = cookie.get('userId') as RequestCookie
+
     const { data } = await api.post('/app/ticket/create', formData, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token.value}` },
     })
 
     return data

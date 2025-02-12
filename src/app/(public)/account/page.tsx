@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { Card } from '@/components/account'
 import { FormAccount } from '@/components/ui/forms'
 import { LoadingSpinner } from '@/components/ui/loading'

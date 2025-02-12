@@ -1,5 +1,8 @@
+'use server'
 
+import { cookies } from 'next/headers'
 import { api } from '../api'
+import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 
 export type Client = {
   IsCompanion: boolean
@@ -18,11 +21,10 @@ export async function fetchClientsByTicketId(
   ticketId: string
 ): Promise<ClientResponse> {
   try {
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOTA4Y2ExYi1jMDhmLTQ5Y2MtYWZmYS1jYjVkZGUyMDY1YTciLCJpYXQiOjE3MzkxOTUwMTV9.lFnGh5WErQSPCobxciywIOGdF5jd26pNUScaMyY0JT0'
-
+    const cookie = await cookies()
+    const token = cookie.get('userId') as RequestCookie
     const { data } = await api.get(`app/client/ticket/${ticketId}`, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token.value}` },
     })
 
     return data
