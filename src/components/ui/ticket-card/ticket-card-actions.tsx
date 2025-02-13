@@ -25,6 +25,7 @@ import {
 import { deleteCLientById } from '@/services/http/delete-client-by-id'
 import { editClient } from '@/services/http/update-client-by-id'
 import { showErrorToast, showSuccessToast } from '../toasts'
+import { deleteTicketById } from '@/services/http/delete-ticket-bu-id'
 // import { editClient } from '@/services/http/update-client-by-id'
 
 export function TicketCardActions({
@@ -39,16 +40,16 @@ export function TicketCardActions({
   // const [userUpdateData, setUserUpdateData] = useState<Person | null>(null)
   const [selectedClientId, setSelectedClientId] = useState<string | null>(null)
 
-  useEffect(() => {
-    async function getClients() {
-      const data = await fetchClientsByTicketId(ticketId)
-      console.log(data.Client)
-      setPersonsList(data.Client)
-    }
+  async function getClients() {
+    const data = await fetchClientsByTicketId(ticketId)
+    console.log(data.Client)
+    setPersonsList(data.Client)
+  }
 
+  async function handleOpen() {
+    setParam(ticketId)
     getClients()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }
 
   const { setParam, deleteParam } = useTicketParam()
 
@@ -136,6 +137,15 @@ export function TicketCardActions({
     }
   }
 
+  async function handleDeleteTicketById() {
+    try {
+      await deleteTicketById(ticketId)
+      showSuccessToast('Passagem cancelada com sucesso!')
+    } catch {
+      showErrorToast('Erro ao cancelar passagem!')
+    }
+  }
+
   // function handleSubmitEditData(data: Person) {
   //   setUserUpdateData(data)
   // }
@@ -174,7 +184,7 @@ export function TicketCardActions({
       </Button> */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant='minimalist' onClick={() => setParam(ticketId)}>
+          <Button variant='minimalist' onClick={handleOpen}>
             <Pencil size={20} className='text-orange-500' />
           </Button>
         </DialogTrigger>
@@ -224,8 +234,7 @@ export function TicketCardActions({
           </div>
         </DialogContent>
       </Dialog>
-
-      <Button variant='minimalist'>
+      <Button variant='minimalist' onClick={handleDeleteTicketById}>
         <Ban size={20} className='text-orange-500' />
       </Button>
     </div>

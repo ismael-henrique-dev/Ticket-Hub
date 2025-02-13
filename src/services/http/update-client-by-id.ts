@@ -1,4 +1,8 @@
+'use server'
+
+import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 import { api } from '../api'
+import { cookies } from 'next/headers'
 
 type EditClientData = {
   CPF?: string
@@ -10,15 +14,15 @@ export async function editClient(
   clientId: string,
   updatedData: EditClientData
 ) {
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOTA4Y2ExYi1jMDhmLTQ5Y2MtYWZmYS1jYjVkZGUyMDY1YTciLCJpYXQiOjE3MzkxOTUwMTV9.lFnGh5WErQSPCobxciywIOGdF5jd26pNUScaMyY0JT0'
-
   try {
+    const cookie = await cookies()
+    const token = cookie.get('userId') as RequestCookie
+
     const { data } = await api.put(
       `/app/client/update/${clientId}`,
       updatedData,
       {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token.value}` },
       }
     )
 

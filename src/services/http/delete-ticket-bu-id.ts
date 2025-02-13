@@ -17,15 +17,15 @@ type ClientResponse = {
   Client: Client
 }
 
-export async function deleteCLientById(
-  clientId: string
+export async function deleteTicketById(
+  ticketId: string
 ): Promise<ClientResponse> {
   try {
     const cookie = await cookies()
     const token = cookie.get('userId') as RequestCookie
-    console.log(clientId)
+    console.log(ticketId)
 
-    const { data } = await api.delete(`app/client/delete/${clientId}`, {
+    const { data } = await api.delete(`app/ticket/cancel/${ticketId}`, {
       headers: { Authorization: `Bearer ${token.value}` },
     })
 
