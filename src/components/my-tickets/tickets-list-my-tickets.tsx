@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { fetchMyTickes, TicketItem } from '@/services/http/fetch-my-tickets'
 import { formattedRelativeDate, formattedRelativeHour } from '@/lib/formatter'
 import { useSearchParams } from 'next/navigation'
+import { LoadingSpinner } from '../ui/loading'
 
 export function TicketsListMyTickets() {
   const [myTicketsList, setMyTicketsList] = useState<TicketItem[]>([])
@@ -16,10 +17,11 @@ export function TicketsListMyTickets() {
     const afterDay = searchParams.get('afterDay') as string
     const beforeDay = searchParams.get('beforeDay') as string
     const priceOrder = searchParams.get('priceOrder') as string
+    const query = searchParams.get('query') as string
 
    useEffect(() => {
       async function getTickes() {
-        const data = await fetchMyTickes(page, transportType, afterDay, beforeDay)
+        const data = await fetchMyTickes(page, transportType, afterDay, beforeDay, query)
         let tickets = data.Ticket
         console.log(tickets)
   
@@ -36,13 +38,16 @@ export function TicketsListMyTickets() {
       }
   
       getTickes()
-    }, [page, transportType, afterDay, beforeDay, priceOrder])
+    }, [page, transportType, afterDay, beforeDay, priceOrder, query])
 
   return (
     <section
       id='tickets-list-my-tickets'
       className='flex flex-1 flex-col gap-8'
     >
+      {myTicketsList.length === 0 && (
+        <LoadingSpinner />
+      )}
       {myTicketsList.map((ticket, index) => (
         <TicketCard.Root variant='secondary' key={index}>
           <TicketCard.Content>

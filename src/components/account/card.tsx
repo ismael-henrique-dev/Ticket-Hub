@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Button } from '../ui'
+import { deleteUser } from '@/services/http/delete-user'
 
 type CardProps = {
   description: string
@@ -18,7 +19,7 @@ export function Card({ Icon, description, buttonText, actionType }: CardProps) {
         <span className='md:max-w-4xl text-sm'>{description}</span>
       </div>
       {actionType === 'click' && (
-        <Button variant='square-red' type='button'>
+        <Button variant='square-red' type='button' onClick={deleteUser}>
           {buttonText}
         </Button>
       )}

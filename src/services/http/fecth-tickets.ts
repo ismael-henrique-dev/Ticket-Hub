@@ -6,13 +6,15 @@ type RequestBody = {
   after?: string
   RouteKind?: TransportType
   beforeDay?: string
+  SearchQuery?: string
 }
 
 export async function fetchTickes(
   page: string,
   transportType: string | null,
   afterDay: string,
-  beforeDay: string
+  beforeDay: string,
+  query: string
 ): Promise<TicketFiltersResponse> {
   try {
     const requestBody: RequestBody = { Page: Number(page) }
@@ -23,6 +25,10 @@ export async function fetchTickes(
 
     if (beforeDay) {
       requestBody.beforeDay = beforeDay
+    }
+
+    if (query) {
+      requestBody.SearchQuery = query
     }
 
     if (transportType && transportType !== 'All') {

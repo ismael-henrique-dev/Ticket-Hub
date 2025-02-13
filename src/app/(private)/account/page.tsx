@@ -1,10 +1,13 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic'
 
 import { Card } from '@/components/account'
+// import { Button } from '@/components/ui'
 import { FormAccount } from '@/components/ui/forms'
 import { LoadingSpinner } from '@/components/ui/loading'
+import { userLogout } from '@/lib/actions'
 import { fetchUserProfile } from '@/services/http/fetch-user-profile'
-import { Info, Lock } from 'lucide-react'
+import { Info, Lock, LogOut } from 'lucide-react'
+import Link from 'next/link'
 import { Suspense } from 'react'
 
 export default async function Account() {
@@ -14,7 +17,13 @@ export default async function Account() {
     <main className='flex flex-col max-w-screen-2xl m-auto gap-10 p-6'>
       <Suspense fallback={<LoadingSpinner />}>
         <section className='flex flex-col gap-8'>
-          <h2 className='text-2xl font-semibold'>Conta</h2>
+          <div className='flex justify-between items-center'>
+            <h2 className='text-2xl font-semibold'>Conta</h2>
+            <Link href='/' onClick={userLogout} className='flex gap-3'>
+              <LogOut />
+              Sair
+            </Link>
+          </div>
           <FormAccount data={data.response} />
           <h2 className='text-2xl font-semibold'>Alterar senha</h2>
           <Card

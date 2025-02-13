@@ -12,14 +12,14 @@ export function TicketListFilters() {
         <TicketFilter.Label>Data</TicketFilter.Label>
         <TicketFilter.DataPicker></TicketFilter.DataPicker>
       </TicketFilter.Item>
-      <TicketFilter.Item>
+      {/* <TicketFilter.Item>
         <TicketFilter.Label>Origem</TicketFilter.Label>
         <TicketFilter.Combobox />
       </TicketFilter.Item>
       <TicketFilter.Item>
         <TicketFilter.Label>Destino</TicketFilter.Label>
         <TicketFilter.Combobox />
-      </TicketFilter.Item>
+      </TicketFilter.Item> */}
       <TicketFilter.Item>
         <TicketFilter.Label>Setor</TicketFilter.Label>
         <TicketFilter.Select data={setors} filterName='transportType' />

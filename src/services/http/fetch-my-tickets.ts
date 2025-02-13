@@ -58,13 +58,15 @@ type RequestBody = {
   after?: string
   RouteKind?: TransportType
   beforeDay?: string
+  SearchQuery?: string
 }
 
 export async function fetchMyTickes(
   page: string,
   transportType: string | null,
   afterDay: string,
-  beforeDay: string
+  beforeDay: string,
+  query: string
 ): Promise<ReturnedTicketList> {
   try {
     const cookie = await cookies()
@@ -78,6 +80,10 @@ export async function fetchMyTickes(
 
     if (beforeDay) {
       requestBody.beforeDay = beforeDay
+    }
+
+    if (query) {
+      requestBody.SearchQuery = query
     }
 
     if (transportType && transportType !== 'All') {

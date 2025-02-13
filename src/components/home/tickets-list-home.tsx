@@ -18,6 +18,7 @@ export function TicketsListHome() {
   const afterDay = searchParams.get('afterDay') as string
   const beforeDay = searchParams.get('beforeDay') as string
   const priceOrder = searchParams.get('priceOrder') as string
+  const query = searchParams.get('query') as string
 
   // useEffect(() => {
   //   async function getTickes() {
@@ -32,7 +33,13 @@ export function TicketsListHome() {
 
   useEffect(() => {
     async function getTickes() {
-      const data = await fetchTickes(page, transportType, afterDay, beforeDay)
+      const data = await fetchTickes(
+        page,
+        transportType,
+        afterDay,
+        beforeDay,
+        query
+      )
       let tickets = data.response.response
 
       if (priceOrder === 'min') {
@@ -48,7 +55,7 @@ export function TicketsListHome() {
     }
 
     getTickes()
-  }, [page, transportType, afterDay, beforeDay, priceOrder])
+  }, [page, transportType, afterDay, beforeDay, priceOrder, query])
 
   return (
     <div className='flex flex-col gap-8'>
