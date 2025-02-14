@@ -1,11 +1,12 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import logo from '../../assets/logo.svg'
 import Image from 'next/image'
 
 export function Header() {
+  const router = useRouter()
   const pathname = usePathname()
 
   const isActiveLink = (href: string) =>
@@ -22,10 +23,14 @@ export function Header() {
         <Link href='/' className={isActiveLink('/')}>
           Home
         </Link>
-        <Link href='/my-tickets' className={isActiveLink('/my-tickets')}>
+        <Link href='/my-tickets' className={isActiveLink('/my-tickets')} onMouseEnter={() => {
+          router.prefetch('/my-tickets')
+        }}>
           Meus Bilhetes
         </Link>
-        <Link href='/account' className={isActiveLink('/account')}>
+        <Link href='/account' className={isActiveLink('/account')} onMouseEnter={() => {
+          router.prefetch('/account')
+        }}>
           Conta
         </Link>
       </nav>
