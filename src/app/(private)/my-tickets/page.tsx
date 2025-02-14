@@ -3,6 +3,12 @@ import {
   TicketsListMyTickets,
 } from '@/components/my-tickets'
 import { Search } from '@/components/ui'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Meus bilhetes',
+  description: 'Página de tickets',
+}
 
 export default function MyTickets() {
   return (

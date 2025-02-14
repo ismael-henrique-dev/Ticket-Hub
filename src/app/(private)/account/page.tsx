@@ -9,6 +9,12 @@ import { fetchUserProfile } from '@/services/http/fetch-user-profile'
 import { Info, Lock, LogOut } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Conta',
+  description: 'Informações da conta',
+}
 
 export default async function Account() {
   const data = await fetchUserProfile()
