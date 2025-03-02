@@ -97,10 +97,6 @@ Durante o desenvolvimento do **Ticket Hub**, aprendi e apliquei conceitos import
 - **Melhores práticas de tipagem** no TypeScript para um código mais robusto.
 - **Organização do Next.js**, utilizando `app` directory para um código modular.
 
-## Funcionalidades
-
-Ticket Hub é uma plataforma **simulada** para a **compra e cancelamento** de passagens de viagem, abrangendo diversos meios de transporte, como ônibus, trem, avião e navio.  
-
 ## Funcionalidades  
 
 - **"Compra" de passagens** – Simulação do processo de aquisição de bilhetes para diferentes meios de transporte.  
