@@ -93,7 +93,7 @@ A estrutura do projeto segue uma organização modularizada:
 Durante o desenvolvimento do **Ticket Hub**, aprendi e apliquei conceitos importantes:
 - **Gerenciamento de formulários** com React Hook Form e validação com Zod.
 - **Estilização eficiente** com TailwindCSS e componentes acessíveis do ShadCN UI.
-- **Gerenciamento de estado e requisições** usando React Query e Axios.
+- **Gerenciamento de estado e requisições** usando Axios.
 - **Melhores práticas de tipagem** no TypeScript para um código mais robusto.
 - **Organização do Next.js**, utilizando `app` directory para um código modular.
 
