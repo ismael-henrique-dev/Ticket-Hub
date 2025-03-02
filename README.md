@@ -35,7 +35,7 @@ O backend do projeto está disponível em:
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/seu-usuario/ticket-hub.git
+   git clone https://github.com/ismael-henrique-dev/Ticket-Hub.git
    cd ticket-hub
    ```
 
