@@ -10,6 +10,12 @@
 
 Ticket Hub é uma plataforma simulada para a compra de passagens de viagem, abrangendo diversos meios de transporte, como ônibus, trem, avião e navio.
 
+## Screenshots
+
+<img src='./public/preview-pages/home.png' />
+<img src='./public/preview-pages/my-account.png' />
+<img src='./public/preview-pages/my-tickets.png' />
+
 ## Tecnologias Utilizadas
 
 - **Next.js** - Framework para React com renderização híbrida e otimização de desempenho.
