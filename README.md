@@ -12,9 +12,17 @@ Ticket Hub é uma plataforma simulada para a compra de passagens de viagem, abra
 
 ## Screenshots
 
-<img src='./public/preview-pages/home.png' />
-<img src='./public/preview-pages/my-account.png' />
-<img src='./public/preview-pages/my-tickets.png' />
+<div style="text-align: center;">
+  <img src='./public/preview-pages/home.png' width="400" alt="Home Page Preview" />
+</div>
+
+<div style="text-align: center;">
+  <img src='./public/preview-pages/my-account.png' width="400" alt="My Account Page Preview" />
+</div>
+
+<div style="text-align: center;">
+  <img src='./public/preview-pages/my-tickets.png' width="400" alt="My Tickets Page Preview" />
+</div>
 
 ## Tecnologias Utilizadas
 
