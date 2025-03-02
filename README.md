@@ -8,7 +8,7 @@
 ![ShadCN UI](https://img.shields.io/badge/ShadCN%20UI-000000?style=for-the-badge)
 ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge)
 
-Ticket Hub é uma plataforma para gerenciamento de tickets, desenvolvida com **Next.js**, **TypeScript**, **React Hook Form**, **Zod**, **TailwindCSS**, **Axios** e **ShadCN UI**.
+Ticket Hub é uma plataforma simulada para a compra de passagens de viagem, abrangendo diversos meios de transporte, como ônibus, trem, avião e navio.
 
 ## Tecnologias Utilizadas
 
@@ -23,13 +23,13 @@ Ticket Hub é uma plataforma para gerenciamento de tickets, desenvolvida com **N
 ## Repositório do Backend
 
 O backend do projeto está disponível em:
-[Ticket Hub - Backend](https://github.com/seu-usuario/ticket-hub-backend)
+[Ticket Hub - Backend](https://github.com/cibatech/TicketHubAPI)
 
 ## Como Rodar o Projeto
 
 ### Requisitos
-- Node.js 18+
-- npm ou yarn
+- Node.js 20+
+- pnpm(de preferência),npm ou yarn 
 
 ### Instalação
 
@@ -41,21 +41,18 @@ O backend do projeto está disponível em:
 
 2. Instale as dependências:
    ```bash
-    pnpm install
-    # ou
-    yarn install
+   pnpm install
+   # ou
+   yarn install
    ```
 
-3. Configure as variáveis de ambiente:
-   Crie um arquivo `.env.local` e adicione as variáveis necessárias (veja `.env.example`).
-
-4. Execute o projeto em ambiente de desenvolvimento:
+3. Execute o projeto em ambiente de desenvolvimento:
    ```bash
-    pnpm dev
-    # ou
-    npm run dev
-    # ou
-    yarn dev
+   pnpm dev
+   # ou
+   npm run dev
+   # ou
+   yarn dev
    ```
 
 5. O projeto estará disponível em: [http://localhost:3000](http://localhost:3000)
@@ -93,17 +90,29 @@ A estrutura do projeto segue uma organização modularizada:
 
 ## Aprendizados
 
-Durante o desenvolvimento do **Ticket Hub**, aprendemos e aplicamos conceitos importantes:
+Durante o desenvolvimento do **Ticket Hub**, aprendi e apliquei conceitos importantes:
 - **Gerenciamento de formulários** com React Hook Form e validação com Zod.
 - **Estilização eficiente** com TailwindCSS e componentes acessíveis do ShadCN UI.
 - **Gerenciamento de estado e requisições** usando React Query e Axios.
 - **Melhores práticas de tipagem** no TypeScript para um código mais robusto.
 - **Organização do Next.js**, utilizando `app` directory para um código modular.
 
-## Contato
-Caso tenha dúvidas ou sugestões, sinta-se à vontade para abrir uma issue ou entrar em contato.
+## Funcionalidades
+
+Ticket Hub é uma plataforma **simulada** para a **compra e cancelamento** de passagens de viagem, abrangendo diversos meios de transporte, como ônibus, trem, avião e navio.  
+
+## Funcionalidades  
+
+- **"Compra" de passagens** – Simulação do processo de aquisição de bilhetes para diferentes meios de transporte.  
+- **Cancelamento de passagens** – Possibilidade de simular o cancelamento de passagens previamente adquiridas.  
+- **Consulta de horários e destinos** – Visualização de opções de viagem com horários disponíveis e locais de partida e chegada.  
+- **Simulação de preços** – Estimativa de valores das passagens com base no meio de transporte, destino e classe escolhida.  
+- **Histórico de reservas** – Acompanhamento das passagens adquiridas e canceladas na plataforma.
 
 ---
 
-**Feito com Next.js e muito código! 🚀**
+Caso tenha dúvidas ou sugestões, sinta-se à vontade para abrir uma issue ou entrar em contato.
+
+
+
 
